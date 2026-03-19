@@ -88,10 +88,16 @@
                 const response = await fetch(`https://api.twelvedata.com/quote?symbol=BTC/USD,XAU/USD,XAG/USD,WTI/USD&apikey=${API_KEY}`);
                 const data = await response.json();
                 
-                if(data['BTC/USD']) {
+                if(data['BTC/USD'] && data['BTC/USD'].close) {
                     document.getElementById('btc-val').innerText = "$" + Math.round(data['BTC/USD'].close).toLocaleString();
+                }
+                if(data['XAU/USD'] && data['XAU/USD'].close) {
                     document.getElementById('gold-val').innerText = "$" + data['XAU/USD'].close;
+                }
+                if(data['XAG/USD'] && data['XAG/USD'].close) {
                     document.getElementById('silver-val').innerText = "$" + data['XAG/USD'].close;
+                }
+                if(data['WTI/USD'] && data['WTI/USD'].close) {
                     document.getElementById('oil-val').innerText = "$" + data['WTI/USD'].close;
                 }
             } catch (e) { 
